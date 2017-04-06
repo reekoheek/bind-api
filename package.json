@@ -11,6 +11,7 @@
   "license": "MIT",
   "dependencies": {
     "bono": "^0.3.0",
+    "fs-promise": "^2.0.2",
     "node-bono-norm": "reekoheek/node-bono-norm#master",
     "node-norm": "xinix-technology/node-norm#master",
     "uuid": "^3.0.1"

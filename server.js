@@ -4,8 +4,13 @@ const config = require('./config')();
 
 const PORT = process.env.PORT || 3000;
 
-const server = http.createServer(new App(config).callback());
+(async () => {
+  const app = new App(config);
+  const server = http.createServer(app.callback());
 
-server.listen(PORT, () => {
-  console.log(`Listening on ${PORT}`);
-});
+  await app.initialize();
+
+  server.listen(PORT, () => {
+    console.log(`Listening on ${PORT}`);
+  });
+})();

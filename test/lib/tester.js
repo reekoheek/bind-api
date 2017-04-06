@@ -2,6 +2,7 @@ const App = require('../../app');
 const http = require('http');
 const request = require('supertest');
 const config = require('../../config')('test');
+const Mock = require('../../adapters/mock');
 
 module.exports = class Tester {
   constructor () {
@@ -31,7 +32,15 @@ module.exports = class Tester {
     return request(this.server).delete(uri);
   }
 
+  getMockData (name) {
+    return Mock.getData(name);
+  }
+
   async reset () {
+    Mock.reset();
+
+    await this.app.initialize();
+
     let { manager } = this.app;
 
     await manager.factory('server').truncate();

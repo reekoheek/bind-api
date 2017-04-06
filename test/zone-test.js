@@ -4,7 +4,7 @@ const Tester = require('./lib/tester');
 const assert = require('assert');
 
 describe('/server/{id}/zone', () => {
-  let tester;
+  let tester = new Tester();
   let server;
 
   function uriOf (uri = '') {
@@ -12,10 +12,10 @@ describe('/server/{id}/zone', () => {
   }
 
   beforeEach(async () => {
-    tester = new Tester();
+    await tester.reset();
 
     let { body: { entry } } = await tester.post('/server')
-      .send({ name: 'memory', adapter: 'memory' })
+      .send({ name: 'mock', adapter: 'mock' })
       .expect('Content-Type', /json/).expect(201);
 
     server = entry;
@@ -66,5 +66,13 @@ describe('/server/{id}/zone', () => {
 
       assert.deepEqual(entry, body.entry);
     });
+  });
+
+  describe('PUT /{id}', () => {
+    it.skip('please write this', () => {});
+  });
+
+  describe('DELETE /{id}', () => {
+    it.skip('please write this', () => {});
   });
 });
