@@ -1,0 +1,27 @@
+{
+  "name": "bind-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon server.js",
+    "test": "mocha"
+  },
+  "author": "Ganesha <reekoheek@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "bono": "^0.3.0",
+    "node-bono-norm": "reekoheek/node-bono-norm#master",
+    "node-norm": "xinix-technology/node-norm#master",
+    "uuid": "^3.0.1"
+  },
+  "devDependencies": {
+    "eslint": "^3.19.0",
+    "eslint-config-standard": "^10.0.0",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-node": "^4.2.2",
+    "eslint-plugin-promise": "^3.5.0",
+    "eslint-plugin-standard": "^2.2.0",
+    "supertest": "^3.0.0"
+  }
+}
