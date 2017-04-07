@@ -4,7 +4,7 @@ const Tester = require('./lib/tester');
 const assert = require('assert');
 
 describe('/adapter', () => {
-  let tester = new Tester();
+  let tester = Tester.factory();
 
   beforeEach(async () => {
     await tester.reset();

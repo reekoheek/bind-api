@@ -4,7 +4,17 @@ const request = require('supertest');
 const config = require('../../config')('test');
 const Mock = require('../../adapters/mock');
 
+let instance;
+
 module.exports = class Tester {
+  static factory () {
+    if (!instance) {
+      instance = new Tester();
+    }
+
+    return instance;
+  }
+
   constructor () {
     this.app = new App(config);
 

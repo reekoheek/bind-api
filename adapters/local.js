@@ -1,8 +1,26 @@
-const Adapter = require('../lib/adapter');
 const path = require('path');
 const fs = require('fs-promise');
+const Adapter = require('../lib/adapter');
+const Binder = require('../lib/binder');
 
 module.exports = class Local extends Adapter {
+  async initialize () {
+    await Promise.all([
+      fs.ensureDir(this.dbdir),
+      fs.ensureDir(this.etcdir),
+    ]);
+  }
+
+  async exists (kind, file) {
+    if (kind === 'db') {
+      let filepath = path.join(this.dbdir, `db.${file}`);
+      let exists = await fs.exists(filepath);
+      return exists;
+    }
+
+    throw new Error('Unimplemented yet');
+  }
+
   async write (kind, file, content) {
     if (kind === 'db') {
       await this.writeDb(file, content);
@@ -11,13 +29,19 @@ module.exports = class Local extends Adapter {
     }
   }
 
+  async reload () {
+    await Binder.reload();
+  }
+
   async writeDb (file, content) {
-    await fs.ensureDir(this.dbdir);
-    await fs.writeFile(path.join(this.dbdir, `db.${file}`), content);
+    let filepath = path.join(this.dbdir, `db.${file}`);
+    await fs.writeFile(filepath, content);
+    Binder.checkZone(file, filepath);
   }
 
   async writeCfg (file, content) {
-    await fs.ensureDir(this.etcdir);
-    await fs.writeFile(path.join(this.etcdir, `db.${file}`), content);
+    let filepath = path.join(this.etcdir, `named.conf.${file}`);
+    await fs.writeFile(filepath, content);
+    Binder.checkConf(filepath);
   }
 };

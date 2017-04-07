@@ -5,15 +5,16 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon server.js",
-    "test": "mocha"
+    "test": "mocha",
+    "docker:localtest": "docker-compose run --rm localtest"
   },
   "author": "Ganesha <reekoheek@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "bono": "^0.3.0",
+    "bono": "^0.3.1",
+    "bono-norm": "^1.0.1",
     "fs-promise": "^2.0.2",
-    "node-bono-norm": "reekoheek/node-bono-norm#master",
-    "node-norm": "xinix-technology/node-norm#master",
+    "node-norm": "^0.3.1",
     "uuid": "^3.0.1"
   },
   "devDependencies": {
@@ -22,7 +23,8 @@
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-node": "^4.2.2",
     "eslint-plugin-promise": "^3.5.0",
-    "eslint-plugin-standard": "^2.2.0",
+    "eslint-plugin-standard": "^3.0.1",
+    "mocha": "^3.2.0",
     "supertest": "^3.0.0"
   }
 }

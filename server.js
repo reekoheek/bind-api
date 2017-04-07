@@ -10,7 +10,13 @@ const PORT = process.env.PORT || 3000;
 
   await app.initialize();
 
+  console.log('');
   server.listen(PORT, () => {
-    console.log(`Listening on ${PORT}`);
+    console.log(`Listening bind_api at port ${PORT} ...`);
   });
-})();
+})().catch(err => {
+  console.log('\n\n\n\n');
+  console.error(`Globally caught error ...`);
+  console.error(err.stack);
+  console.log('\n\n\n\n');
+});

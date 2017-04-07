@@ -2,22 +2,23 @@ const Bundle = require('bono');
 const Manager = require('node-norm');
 const ServerBundle = require('./bundles/server');
 const AdapterBundle = require('./bundles/adapter');
-const fs = require('fs-promise');
-const path = require('path');
+const Adapter = require('./lib/adapter');
+const Binder = require('./lib/binder');
 
 module.exports = class App extends Bundle {
   constructor (config) {
     super();
 
-    let { env, debug } = config;
-
+    let { env, debug, mode } = config;
     let manager = this.manager = new Manager(config);
+
+    this.mode = mode;
 
     if (env !== 'test') {
       this.use(require('bono/middlewares/logger')());
     }
     this.use(require('bono/middlewares/json')({ debug }));
-    this.use(require('node-bono-norm/middleware')({ manager }));
+    this.use(require('bono-norm/middleware')({ manager }));
 
     this.get('/', ctx => ({ name: 'bind-api' }));
 
@@ -26,15 +27,8 @@ module.exports = class App extends Bundle {
   }
 
   async initialize () {
-    await this.manager.factory('adapter').truncate();
+    await Binder.initialize(this.mode);
 
-    let files = await fs.readdir(path.join(__dirname, 'adapters'));
-    let q = this.manager.factory('adapter');
-    files.map(file => {
-      let name = path.basename(file, '.js');
-      let source = '../adapters/' + name;
-      q.insert({ name, source });
-    });
-    await q.save();
+    await Adapter.initialize(this.manager);
   }
 };

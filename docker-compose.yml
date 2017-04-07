@@ -1,0 +1,22 @@
+version: "3"
+
+services:
+  localtest:
+    build:
+      context: .
+      args:
+        build: debug
+    environment:
+      - "BIND_API_MODE=standalone"
+    # volumes:
+    #   - ".:/app"
+    command: [ ./node_modules/.bin/mocha, ./test/adapter-local-test.js ]
+  local:
+    build: .
+    environment:
+      - "BIND_API_MODE=standalone"
+    # volumes:
+    #   - ".:/app"
+    ports:
+      - "53:53/udp"
+      - "3000:3000"

@@ -12,10 +12,18 @@ module.exports = class Mock extends Adapter {
     return datum[name];
   }
 
+  exists (kind, file) {
+
+  }
+
   write (kind, file, content) {
     let data = Mock.getData(this.name);
 
     data[kind][file] = content;
+  }
+
+  reload () {
+
   }
 };
 

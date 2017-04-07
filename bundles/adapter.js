@@ -1,4 +1,4 @@
-const NormBundle = require('node-bono-norm/bundle');
+const NormBundle = require('bono-norm/bundle');
 
 module.exports = class AdapterBundle extends NormBundle {
   constructor () {

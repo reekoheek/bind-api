@@ -4,7 +4,7 @@ const Tester = require('./lib/tester');
 const assert = require('assert');
 
 describe('/server/{id}/zone', () => {
-  let tester = new Tester();
+  let tester = Tester.factory();
   let server;
 
   function uriOf (uri = '') {
