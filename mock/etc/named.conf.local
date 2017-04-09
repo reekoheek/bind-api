@@ -1,0 +1,5 @@
+zone "foo.bar" {
+  type master;
+  file "/var/lib/bind/db.foo.bar";
+};
+

@@ -20,3 +20,18 @@ services:
     ports:
       - "53:53/udp"
       - "3000:3000"
+  docker:
+    build: .
+    ports:
+      - 3000:3000
+    volumes:
+      - "./mock/data:/data"
+      - "./mock/etc:/etc/bind"
+      - "./mock/db:/var/lib/bind"
+  mockbind:
+    image: reekoheek/bind
+    ports:
+      - 53:53/udp
+    volumes:
+      - "./mock/etc:/etc/bind"
+      - "./mock/db:/var/lib/bind"

@@ -1,0 +1,12 @@
+
+$TTL		38400
+$ORIGIN		foo.bar.
+@	IN	SOA		ns.foo.bar. admin.foo.bar. (
+				2
+				10800
+				3600
+				604800
+				38400 )
+@	IN	NS		ns
+@	IN	A		1.1.1.1
+ns	IN	A		1.1.1.2

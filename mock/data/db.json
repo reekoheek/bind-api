@@ -1,0 +1,59 @@
+{
+  "adapter": [
+    {
+      "id": "1bca9de6-5fe6-4ec8-bffc-47ada0f6aa3c",
+      "name": "local",
+      "source": "../adapters/local"
+    },
+    {
+      "id": "3727e4e4-62de-4853-a33c-f73799d08c6b",
+      "name": "mock",
+      "source": "../adapters/mock"
+    }
+  ],
+  "server": [
+    {
+      "id": "6962a23a-9402-4d06-a1b2-97881c9bcaa9",
+      "name": "local",
+      "adapter": "local",
+      "etcdir": "/etc/bind",
+      "dbdir": "/var/lib/bind",
+      "localfile": "named.conf.local"
+    }
+  ],
+  "zone": [
+    {
+      "id": "a2f899af-908b-4ac0-a86b-89ce0a7461a2",
+      "name": "foo.bar",
+      "master": "ns.foo.bar",
+      "email": "admin@foo.bar",
+      "records": [
+        {
+          "label": "@",
+          "rr": "NS",
+          "value": "ns",
+          "pref": null
+        },
+        {
+          "label": "@",
+          "rr": "A",
+          "value": "1.1.1.1",
+          "pref": null
+        },
+        {
+          "label": "ns",
+          "rr": "A",
+          "value": "1.1.1.2",
+          "pref": null
+        }
+      ],
+      "server_id": "6962a23a-9402-4d06-a1b2-97881c9bcaa9",
+      "serial": 2,
+      "refresh": 10800,
+      "retry": 3600,
+      "expire": 604800,
+      "ttl": 38400,
+      "pserial": 2
+    }
+  ]
+}

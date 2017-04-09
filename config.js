@@ -13,6 +13,7 @@ module.exports = function (env = 'production') {
   console.log('BIND_API_DEBUG', debug);
 
   let adapter = env === 'test' ? 'memory' : 'disk';
+  let file = '/data/db.json';
 
   return {
     env,
@@ -22,6 +23,7 @@ module.exports = function (env = 'production') {
       {
         name: 'default',
         adapter,
+        file,
         schemas: [
           {
             name: 'server',
